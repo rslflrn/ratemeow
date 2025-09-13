@@ -1,13 +1,12 @@
 {
   "name": "ratemeow",
   "version": "1.0.0",
-  "private": true,
-  "type": "module",
+  "description": "ratemeow book catalogue",
+  "main": "index.js",
   "scripts": {
-    "dev": "vercel dev",
     "start": "node index.js"
   },
   "dependencies": {
-    "googleapis": "^126.0.1"
+    "googleapis": "^131.0.0"
   }
 }
