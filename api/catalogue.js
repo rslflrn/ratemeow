@@ -2,18 +2,16 @@ import { google } from "googleapis";
 
 export default async function handler(req, res) {
   try {
-    const privateKey = process.env.GOOGLE_PRIVATE_KEY;
+    const rawKey = process.env.GOOGLE_PRIVATE_KEY || "";
     const clientEmail = process.env.GOOGLE_CLIENT_EMAIL;
     const sheetId = process.env.GOOGLE_SHEET_ID;
 
-    if (!privateKey || !clientEmail || !sheetId) {
+    if (!rawKey || !clientEmail || !sheetId) {
       throw new Error("Missing Google Sheets environment variables");
     }
 
-    // Fix newline issue for private key
-    const formattedKey = privateKey.includes("\\n")
-      ? privateKey.replace(/\\n/g, "\n")
-      : privateKey;
+    // Convert \n to real newlines
+    const formattedKey = rawKey.replace(/\\n/g, "\n");
 
     const auth = new google.auth.JWT(
       clientEmail,
@@ -26,7 +24,7 @@ export default async function handler(req, res) {
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: sheetId,
-      range: "Sheet1!A:E", // adjust if sheet name is different
+      range: "Sheet1!A:E",
     });
 
     const rows = response.data.values;
@@ -42,8 +40,9 @@ export default async function handler(req, res) {
       return book;
     });
 
-    // filter only available
-    const availableBooks = books.filter((b) => b.status.toLowerCase() === "available");
+    const availableBooks = books.filter(
+      (b) => (b.status || "").toLowerCase() === "available"
+    );
 
     res.status(200).json({ books: availableBooks });
   } catch (err) {
