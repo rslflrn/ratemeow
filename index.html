@@ -3,13 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ratemeow</title>
+  <title>pawrate catalogue</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-  <div class="landing">
-    <h1>ratemeow</h1>
-    <a href="catalogue.html" class="btn">📚 catalogue</a>
-  </div>
+  <header>pawrate</header>
+  <main>
+    <h2>📖 available books</h2>
+    <div class="catalogue-content">
+      <!-- Update this section manually to add/remove books -->
+      
+      <div class="book-item">
+        <div class="book-code">[rm001]</div>
+        <div class="book-details">
+          <h3>the great gatsby</h3>
+          <p class="author">f. scott fitzgerald</p>
+          <p class="price">Rp 30,000</p>
+          <p class="status available">available</p>
+        </div>
+      </div>
+
+      <div class="book-item">
+        <div class="book-code">[rm002]</div>
+        <div class="book-details">
+          <h3>to kill a mockingbird</h3>
+          <p class="author">harper lee</p>
+          <p class="price">Rp 20,000</p>
+          <p class="status available">available</p>
+        </div>
+      </div>
+
+      <div class="book-item">
+        <div class="book-code">[rm003]</div>
+        <div class="book-details">
+          <h3>1984</h3>
+          <p class="author">george orwell</p>
+          <p class="price">$18</p>
+          <p class="status sold">sold</p>
+        </div>
+      </div>
+
+      <div class="book-item">
+        <div class="book-code">[BK004]</div>
+        <div class="book-details">
+          <h3>pride and prejudice</h3>
+          <p class="author">jane austen</p>
+          <p class="price">$14</p>
+          <p class="status available">available</p>
+        </div>
+      </div>
+
+      <div class="book-item">
+        <div class="book-code">[BK005]</div>
+        <div class="book-details">
+          <h3>the catcher in the rye</h3>
+          <p class="author">j.d. salinger</p>
+          <p class="price">$16</p>
+          <p class="status sold">sold</p>
+        </div>
+      </div>
+
+      <!-- Add more books here following the same format -->
+      
+    </div>
+    
+    <div class="contact-info">
+      <p>💬 to order, contact us:</p>
+      <p>📧 email: orders@pawrate.com</p>
+      <p>📱 telegram: @pawrate_orders</p>
+    </div>
+  </main>
+
+  <script>
+    // Simple Telegram WebApp integration
+    if (window.Telegram?.WebApp) {
+      const tg = window.Telegram.WebApp;
+      tg.ready();
+      tg.expand();
+      tg.setHeaderColor('#DCD6F7');
+      tg.setBackgroundColor('#CDE6F5');
+    }
+  </script>
 </body>
 </html>
