@@ -1,39 +1,79 @@
-import { google } from "googleapis";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogue - RateMeow</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fafafa;
+      color: #333;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      margin-bottom: 30px;
+    }
+    #catalogue {
+      text-align: left;
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 18px;
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+    .home-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #333;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+    .home-btn:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>📚 Catalogue</h1>
+  <div id="catalogue">Loading catalogue...</div>
+  <a class="home-btn" href="index.html">🏠 Home</a>
 
-export default async function handler(req, res) {
-  try {
-    const auth = new google.auth.GoogleAuth({
-      credentials: {
-        client_email: process.env.GOOGLE_CLIENT_EMAIL,
-        private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
-      },
-      scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
-    });
+  <script>
+    async function loadCatalogue() {
+      try {
+        const res = await fetch('/api/catalogue');
+        const data = await res.json();
 
-    const sheets = google.sheets({ version: "v4", auth });
+        if (!data.data) {
+          document.getElementById('catalogue').innerText = "No catalogue data found.";
+          return;
+        }
 
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: "1JeUsm9ebgixpjOCL4XIz5VlTC7gkeTlKmScX7-thF6g", // your sheet ID
-      range: "catalogue!A2:E",
-    });
+        // Header row is skipped (your API already starts from A2:E)
+        const books = data.data.filter(row => row[4] && row[4].toLowerCase() === 'available');
 
-    const rows = response.data.values || [];
+        if (books.length === 0) {
+          document.getElementById('catalogue').innerText = "All books are sold out.";
+          return;
+        }
 
-    if (rows.length === 0) {
-      return res.status(200).json({ catalogue: [] });
+        const list = books.map(row => {
+          const [title, author, code, price] = row;
+          return `${title} | ${author} | ${code.toUpperCase()} | ${price}`;
+        }).join("\n\n");
+
+        document.getElementById('catalogue').innerText = list;
+      } catch (err) {
+        document.getElementById('catalogue').innerText = "Failed to load catalogue.";
+        console.error("Error fetching catalogue:", err);
+      }
     }
 
-    const catalogue = rows.map(([title, author, code, price, status]) => ({
-      title,
-      author,
-      code,
-      price,
-      status,
-    }));
-
-    res.status(200).json({ catalogue });
-  } catch (error) {
-    console.error("API ERROR:", error); // 👈 This will show in Vercel logs
-    res.status(500).json({ error: error.message });
-  }
-}
+    loadCatalogue();
+  </script>
+</body>
+</html>
