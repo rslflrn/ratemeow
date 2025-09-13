@@ -1,83 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ratemeow | catalogue</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inconsolata&family=PT+Sans&family=Public+Sans&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catalogue - Ratemeow</title>
   <style>
     body {
-      font-family: 'Public Sans', 'PT Sans', sans-serif;
-      background-color: #fff;
-      color: #333;
+      font-family: "PT Sans", sans-serif;
+      background-color: #fafafa;
+      color: #222;
       text-align: center;
-      padding: 2rem;
+      margin: 0;
+      padding: 20px;
     }
-
     h1 {
-      font-family: 'Inconsolata', monospace;
+      font-family: "Inconsolata", monospace;
       font-size: 2rem;
-      margin-bottom: 2rem;
+      margin-bottom: 20px;
     }
-
-    #catalogue-list {
+    #catalogue {
+      text-align: left;
       max-width: 600px;
       margin: 0 auto;
-      text-align: left;
+      line-height: 1.8;
     }
-
-    .book-item {
-      padding: 0.5rem 0;
+    .book-line {
       border-bottom: 1px solid #ddd;
-      font-size: 1rem;
+      padding: 8px 0;
+      font-family: "Public Sans", sans-serif;
     }
-
     .home-btn {
       display: inline-block;
-      margin-top: 2rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #6C63FF;
-      color: white;
+      margin-top: 20px;
+      padding: 10px 16px;
+      background: #222;
+      color: #fff;
       text-decoration: none;
-      border-radius: 80px;
-      font-size: 1rem;
-      transition: background-color 0.3s ease;
+      border-radius: 6px;
+      font-size: 14px;
     }
-
     .home-btn:hover {
-      background-color: #574ed1;
+      background: #444;
     }
   </style>
 </head>
 <body>
-  <h1>📚 catalogue</h1>
+  <h1>📚 Catalogue</h1>
+  <div id="catalogue">Loading...</div>
 
-  <div id="catalogue-list">loading books...</div>
-
-  <a href="index.html" class="home-btn">home</a>
+  <a href="index.html" class="home-btn">🏠 Home</a>
 
   <script>
     async function loadCatalogue() {
       try {
-        const res = await fetch('/api/catalogue');
+        const res = await fetch("/api/catalogue");
+        if (!res.ok) throw new Error("Failed to fetch catalogue");
         const data = await res.json();
 
-        const list = document.getElementById('catalogue-list');
-        list.innerHTML = "";
+        const container = document.getElementById("catalogue");
+        container.innerHTML = "";
 
-        if (data.books && data.books.length > 0) {
-          data.books.forEach(book => {
-            const item = document.createElement("div");
-            item.classList.add("book-item");
-            item.textContent = `${book.title} | ${book.author} | ${book.bookCode} | ${book.price}`;
-            list.appendChild(item);
-          });
-        } else {
-          list.textContent = "no available books at the moment.";
+        if (data.books.length === 0) {
+          container.innerHTML = "<p>No available books at the moment.</p>";
+          return;
         }
+
+        data.books.forEach((book) => {
+          const line = document.createElement("div");
+          line.className = "book-line";
+          line.textContent = `${book.title} | ${book.author} | ${book.code} | ${book.price}`;
+          container.appendChild(line);
+        });
       } catch (err) {
         console.error(err);
-        document.getElementById('catalogue-list').textContent = "failed to load catalogue.";
+        document.getElementById("catalogue").innerHTML =
+          "<p>❌ Failed to load catalogue.</p>";
       }
     }
 
