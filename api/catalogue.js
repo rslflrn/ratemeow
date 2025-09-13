@@ -1,31 +1,30 @@
-// /api/catalogue.js
-import { Client } from "@notionhq/client";
-
-const notion = new Client({ auth: process.env.NOTION_TOKEN });
+import { google } from "googleapis";
 
 export default async function handler(req, res) {
   try {
-    const response = await notion.databases.query({
-      database_id: process.env.CATALOGUE_DB,
-      filter: {
-        property: "status",
-        select: {
-          equals: "available"
-        }
-      }
+    const auth = new google.auth.JWT(
+      process.env.GOOGLE_CLIENT_EMAIL,
+      null,
+      process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+      ["https://www.googleapis.com/auth/spreadsheets.readonly"]
+    );
+
+    const sheets = google.sheets({ version: "v4", auth });
+
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: process.env.SHEET_ID,
+      range: "Sheet1!A2:E", // assuming your headers are in row 1
     });
 
-    const books = response.results.map(page => {
-      const props = page.properties;
-      return {
-        id: page.id,
-        title: props.Name?.title?.[0]?.plain_text || "",
-        author: props.author?.rich_text?.[0]?.plain_text || "",
-        code: props.code?.rich_text?.[0]?.plain_text || "",
-        price: props.price?.number || 0,
-        status: props.status?.select?.name || ""
-      };
-    });
+    const rows = response.data.values || [];
+
+    const books = rows.map(row => ({
+      title: row[0] || "",
+      author: row[1] || "",
+      code: row[2] || "",
+      price: row[3] || "",
+      status: row[4] || "",
+    })).filter(book => book.status.toLowerCase() === "available");
 
     res.status(200).json(books);
   } catch (error) {
