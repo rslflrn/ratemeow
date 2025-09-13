@@ -1,14 +1,12 @@
 {
   "name": "ratemeow",
   "version": "1.0.0",
-  "description": "ratemeow book catalogue site with google sheets backend",
-  "main": "index.js",
+  "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vercel dev",
     "start": "node index.js"
   },
-  "license": "MIT",
-  "type": "module",
   "dependencies": {
     "googleapis": "^126.0.1"
   }
