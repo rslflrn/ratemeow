@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>catalogue | ratemeow</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <header>ratemeow</header>
+  <main>
+    <h2>catalogue</h2>
+    
+    <div class="books-grid">
+      
+      <div class="book-card">
+        <div class="book-image-placeholder">
+          <img src="images/great-gatsby.jpg" alt="the great gatsby cover" class="book-image">
+        </div>
+        <div class="book-info">
+          <div class="book-title">title <span class="book-code">[book code]</span></div>
+          <div class="book-author">author</div>
+          <div class="book-price">price</div>
+        </div>
+      </div>
+
+      <div class="book-card">
+        <div class="book-image-placeholder">
+          <img src="images/mockingbird.jpg" alt="to kill a mockingbird cover" class="book-image">
+        </div>
+        <div class="book-info">
+          <div class="book-title">title <span class="book-code">[book code]</span></div>
+          <div class="book-author">author</div>
+          <div class="book-price">price</div>
+        </div>
+      </div>
+
+      <div class="book-card">
+        <div class="book-image-placeholder">
+          <img src="images/1984.jpg" alt="1984 cover" class="book-image">
+        </div>
+        <div class="book-info">
+          <div class="book-title">title <span class="book-code">[book code]</span></div>
+          <div class="book-author">author</div>
+          <div class="book-price">price</div>
+        </div>
+      </div>
+
+      <div class="book-card">
+        <div class="book-image-placeholder">
+          <img src="images/pride-prejudice.jpg" alt="pride and prejudice cover" class="book-image">
+        </div>
+        <div class="book-info">
+          <div class="book-title">title <span class="book-code">[book code]</span></div>
+          <div class="book-author">author</div>
+          <div class="book-price">price</div>
+        </div>
+      </div>
+
+      <!-- Template for adding new books -->
+      <!-- 
+      <div class="book-card">
+        <div class="book-image-placeholder">
+          <img src="images/your-book.jpg" alt="book title cover" class="book-image">
+        </div>
+        <div class="book-info">
+          <div class="book-title">your book title <span class="book-code">[BK###]</span></div>
+          <div class="book-author">author name</div>
+          <div class="book-price">$##</div>
+        </div>
+      </div>
+      -->
+      
+    </div>
+    
+    <div class="navigation">
+      <a href="index.html" class="nav-button">home</a>
+    </div>
+  </main>
+
+  <script>
+    // Simple Telegram WebApp integration
+    if (window.Telegram?.WebApp) {
+      const tg = window.Telegram.WebApp;
+      tg.ready();
+      tg.expand();
+      tg.setHeaderColor('#DCD6F7');
+      tg.setBackgroundColor('#CDE6F5');
+    }
+  </script>
+</body>
+</html>
