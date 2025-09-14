@@ -1,36 +1,147 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ratemeow</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-</head>
-<body>
-  <header>ratemeow</header>
-  <main>
-    <h2>would you be their new home?</h2>
-    
-    <div class="navigation">
-      <a href="catalogue.html" class="nav-button">📖 catalogue</a>
-    </div>
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=PT+Sans:wght@400;700&family=Public+Sans:wght@400;700&display=swap');
 
-     <div class="navigation">
-      <a href="faq.html" class="nav-button">📦 how to order</a>
-    </div>
-    
-  </main>
+/* General */
+body {
+  margin: 0;
+  font-family: 'PT Sans', sans-serif;
+  background-color: #cce6f6;
+  text-align: center;
+  color: #222;
+}
 
-  <script>
-    // Simple Telegram WebApp integration
-    if (window.Telegram?.WebApp) {
-      const tg = window.Telegram.WebApp;
-      tg.ready();
-      tg.expand();
-      tg.setHeaderColor('#DCD6F7');
-      tg.setBackgroundColor('#CDE6F5');
-    }
-  </script>
-</body>
-</html>
+header img {
+  width: 100px;
+  margin: 20px auto 10px;
+  display: block;
+}
+
+h1 {
+  font-family: 'Inconsolata', monospace;
+  font-size: 1.6rem;
+  margin: 0;
+}
+
+h2 {
+  font-family: 'Public Sans', sans-serif;
+  font-size: 1.3rem;
+  color: #555;
+  margin: 10px 0;
+}
+
+footer {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.8rem;
+  margin: 20px 0;
+}
+
+/* Buttons */
+.button {
+  display: block;
+  margin: 12px auto;
+  padding: 14px 20px;
+  border-radius: 25px;
+  background: #e1d4f9;
+  border: none;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 1.1rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  max-width: 250px;
+  transition: 0.2s ease;
+}
+
+.button:hover {
+  background: #d4c2f5;
+}
+
+.button.black {
+  background: black;
+  color: #cce6f6;
+}
+
+/* Catalogue */
+.catalogue-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  padding: 20px;
+}
+
+.catalogue-card {
+  background: #e1d4f9;
+  border-radius: 20px;
+  padding: 15px;
+}
+
+.catalogue-card h3 {
+  font-family: 'Inconsolata', monospace;
+  font-size: 1rem;
+  margin: 10px 0 5px;
+}
+
+.catalogue-card p {
+  font-family: 'PT Sans', sans-serif;
+  font-size: 0.9rem;
+  margin: 3px 0;
+  color: #555;
+}
+
+/* How to order */
+.steps {
+  padding: 20px;
+}
+
+.step {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding: 15px;
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.step img {
+  width: 50px;
+  margin-right: 10px;
+}
+
+.step p {
+  font-family: 'PT Sans', sans-serif;
+  font-size: 0.95rem;
+}
+
+.links {
+  margin: 20px 0;
+}
+
+.links a {
+  display: inline-block;
+  margin: 5px 10px;
+  padding: 12px 20px;
+  border-radius: 25px;
+  background: #e1d4f9;
+  font-family: 'Public Sans', sans-serif;
+  text-decoration: none;
+  color: black;
+}
+
+.links a:hover {
+  background: #d4c2f5;
+}
+
+/* Responsive */
+@media (min-width: 600px) {
+  .catalogue-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .catalogue-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
