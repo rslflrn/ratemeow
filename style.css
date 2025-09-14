@@ -62,30 +62,75 @@ footer {
 }
 
 /* Catalogue */
+.catalogue-section {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
 .catalogue-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
-  padding: 20px;
+  grid-template-columns: repeat(2, 1fr); /* always 2 per row */
+  gap: 2rem;
+  max-width: 800px; /* keeps it gallery-like */
+  width: 100%;
 }
 
-.catalogue-card {
-  background: #e1d4f9;
-  border-radius: 20px;
-  padding: 15px;
+.book-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
 }
 
-.catalogue-card h3 {
-  font-family: 'Inconsolata', monospace;
-  font-size: 1rem;
-  margin: 10px 0 5px;
+.book-card:hover {
+  transform: translateY(-4px);
 }
 
-.catalogue-card p {
-  font-family: 'PT Sans', sans-serif;
+.book-image-placeholder {
+  width: 100%;
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f8f8;
+}
+
+.book-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.book-info {
+  padding: 1rem;
+  font-family: "PT Sans", sans-serif;
+  text-align: center; /* makes gallery feel balanced */
+}
+
+.book-title {
+  font-family: "Inconsolata", monospace;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.book-code {
   font-size: 0.9rem;
-  margin: 3px 0;
-  color: #555;
+  color: #666;
+}
+
+.book-author {
+  font-size: 0.95rem;
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.book-price {
+  font-family: "Public Sans", sans-serif;
+  font-weight: bold;
+  color: #222;
 }
 
 /* How to order */
