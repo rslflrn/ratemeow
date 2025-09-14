@@ -7,43 +7,40 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <img src="images/ratemeowlogo.png" alt="ratemeow logo">
-    <h1>ratemeow</h1>
-    <h2>catalogue</h2>
+  <header class="site-header">
+    <img src="images/ratemeowlogo.png" alt="ratemeow logo" class="logo" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend','<span class=\'logo-fallback\'>ratemeow</span>');">
+    
+    <h2 class="subtitle">catalogue</h2>
   </header>
 
-  <main>
-    <div id="catalogue" class="catalogue-grid">
-
-      <!-- book cards start -->
+  <main class="catalogue">
+    <div class="book-grid">
+      <!-- Example card (duplicate & update manually) -->
       <div class="book-card">
         <div class="book-image-placeholder">
-          <img src="images/kapan-nanti.png" alt="Kapan Nanti" class="book-image">
+          <img src="images/kapan-nanti.jpg" alt="book title cover" class="book-image">
         </div>
         <div class="book-info">
-          <div class="book-title">Kapan Nanti <span class="book-code">[rm001]</span></div>
-          <div class="book-author">Ziggy Z.</div>
-          <div class="book-price">Rp30.000</div>
+          <div class="book-title">kapan nanti <span class="book-code">[rm001]</span></div>
+          <div class="book-author">ziggy z.</div>
+          <div class="book-price">Rp 30k</div>
         </div>
       </div>
 
+      <!-- Add more cards below -->
       <div class="book-card">
         <div class="book-image-placeholder">
-          <img src="images/book2.jpg" alt="Book Two cover" class="book-image">
+          <img src="images/your-book2.jpg" alt="book title cover" class="book-image">
         </div>
         <div class="book-info">
-          <div class="book-title">Book Two <span class="book-code">[BK002]</span></div>
-          <div class="book-author">Another Author</div>
-          <div class="book-price">Rp25.000</div>
+          <div class="book-title">another book <span class="book-code">[BK002]</span></div>
+          <div class="book-author">second author</div>
+          <div class="book-price">$12</div>
         </div>
       </div>
-
-      <!-- duplicate this block for new books -->
-
     </div>
 
-    <a href="index.html" class="button black">home</a>
+    <a href="index.html" class="button home-button">home</a>
   </main>
 </body>
 </html>
